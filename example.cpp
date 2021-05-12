@@ -2,8 +2,8 @@
 #include "format.h" // for #define in logger
 #include <pthread.h>
 
+logger log;
 
-    logger log;
 void * logging(void*) {
     log.error("not ok");
     return NULL;
