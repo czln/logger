@@ -5,7 +5,7 @@
 logger log;
 
 void * logging(void*) {
-    log.error("not ok");
+    log.error(std::string("not ok"));
     return NULL;
 }
 class test {
@@ -17,7 +17,8 @@ public:
     void init();
 };
 void test::init() {
-    log.info("info_test");
+    std::string a = "string test";
+    log.info("%s", a);
     pthread_create(&p1, NULL, logging, NULL);
     pthread_create(&p2, NULL, logging, NULL);
     pthread_join(p1, NULL);
@@ -29,7 +30,7 @@ int main() {
 
     log.set_attr(STDOUT | FILES | ERR_MSG, "out.log");
     log.set_color(true);
-    log.set_lvl(WARNING);
+    // log.set_lvl(WARNING);
     class test t;
     t.init();
     return 0;
