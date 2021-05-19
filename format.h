@@ -1,3 +1,6 @@
+#ifndef FORMAT_H
+#define FORMAT_H
+
 #include <string>
 #include <vector>
 #include <cstring>
@@ -34,3 +37,5 @@ inline std::string format_string(std::string format, std::string str, Args... ar
 
     return std::string(buffer);
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef LOGGER_H
+#define LOGGER_H
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -6,6 +9,7 @@
 #include <unordered_map>
 #include <initializer_list>
 #include <ctime>
+#include "format.h"
 /**
  *  TODO: signal dump i.g. crash handle
  */
@@ -67,7 +71,7 @@ public:
     void set_attr(attr_t att, std::string file=std::string()) {attr = att; filename = file;} 
     // set level colr on or off
     void set_color(bool arg) { has_color = arg; }
-    void set_fmt(std::string str){ timefmt = str; }    /** TODO: set format*/
+    void set_fmt(std::string str){ timefmt = str; }
 
     /**
      *  NOTE: even it's a public memthod, it's not supposed to be used directly
@@ -97,3 +101,5 @@ public:
 #endif
 };
 /** TODO: extern C*/
+
+#endif  // LOGGER_H
