@@ -1,5 +1,4 @@
 #include "logger.h"
-#include "format.h"
 #include <cstdio>
 #include <cstdlib>
 const std::string logger::_out(std::string str, lvl_t lvl, std::string func, std::string file, int line) {
@@ -50,3 +49,5 @@ const std::string logger::_out(std::string str, lvl_t lvl, std::string func, std
     return std::string();
 }
 
+
+logger logging(INFO);

@@ -32,7 +32,7 @@ enum {
     STDOUT = 1, // default
     FILES,
     BOTH,
-    ERR_MSG
+    ERR_MSG     // enable stderr info if lvl>=ERROR
 };
 
 class logger {
@@ -46,9 +46,8 @@ private:
     std::unordered_map<lvl_t, std::string> color_map;
 
 public:
-    logger() : logger(INFO, STDOUT){ }
-    explicit logger(lvl_t lvl) : logger(lvl, STDOUT) { }
-    explicit logger(lvl_t lvl, attr_t att) : level(lvl), attr(att) { init(); }
+    logger(lvl_t lvl=INFO, attr_t att=STDOUT) :
+        level(lvl), attr(att) { init(); }
     ~logger() {};
 
 private:
@@ -101,5 +100,7 @@ public:
 #endif
 };
 /** TODO: extern C*/
+
+extern logger logg;
 
 #endif  // LOGGER_H
