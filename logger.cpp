@@ -8,7 +8,7 @@ const std::string logger::_out(std::string str, lvl_t lvl, std::string func, std
         std::cout << "log failed to initialize\n";
         return std::string();
     }
-    if (lvl > WARNING) {
+    if ((lvl>WARNING) && (attr|ERR_MSG)) {
         if (errno) {
             str = str + ": " + std::string(strerror(errno));
             errno = 0;
