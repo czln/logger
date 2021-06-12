@@ -101,6 +101,6 @@ public:
 };
 /** TODO: extern C*/
 
-extern logger logg;
+extern logger logging;
 
 #endif  // LOGGER_H
