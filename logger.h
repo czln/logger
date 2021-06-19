@@ -81,7 +81,7 @@ public:
 #define _STRING_WITH_COLOR(str)   ((color_map[lvl] + str + DEFAULT_COLOR).data())
 
 /** @a meta template programme*/
-#if __cplusplus > 2011
+#if __cplusplus > 20110101
 /** @p ##__VA_ARGS__ may not be supported by some compilers
  *  but @p __VA_ARGS__ is supported after c++11
  *  TODO: these defines cause some include path problems @p "format_string()" for @p __PRETTY_FUNCTION__: 
