@@ -9,19 +9,18 @@
 #include <unordered_map>
 #include <initializer_list>
 #include <ctime>
-#include "format.h"
 /**
  *  TODO: signal dump i.g. crash handle
  */
 typedef int lvl_t;
 typedef int attr_t;
 
-static const std::string DEFAULT_COLOR = "\033[0m";
+static const char* DEFAULT_COLOR = "\033[0m";
 
 // level
 enum {
-    INFO,   // default
     DEBUG,
+    INFO,   // default
     WARNING,
     ERROR,  // error which would cause the runing function terminate
     FATAL   // which would cause the whole programme terminate
@@ -81,10 +80,9 @@ public:
 #define _STRING_WITH_COLOR(str)   ((color_map[lvl] + str + DEFAULT_COLOR).data())
 
 /** @a meta template programme*/
-#if __cplusplus > 20110101
+#if __cplusplus > 201101
 /** @p ##__VA_ARGS__ may not be supported by some compilers
  *  but @p __VA_ARGS__ is supported after c++11
- *  TODO: these defines cause some include path problems @p "format_string()" for @p __PRETTY_FUNCTION__: 
  */
 #define info(str, ...) _out(format_string(str, ##__VA_ARGS__), INFO, __PRETTY_FUNCTION__, __FILE__, __LINE__)
 #define debug(str, ...) _out(format_string(str, ##__VA_ARGS__), DEBUG, __PRETTY_FUNCTION__, __FILE__, __LINE__)
@@ -101,6 +99,15 @@ public:
 };
 /** TODO: extern C*/
 
-extern logger logging;
+
+/** TODO: args can't have string class for now*/
+template <typename ...Args>
+inline std::string format_string(std::string format, Args... args) {
+    char buffer[BUFSIZ];
+    size_t newlen = snprintf(&buffer[0], BUFSIZ-1, format.data(), args...);
+    return std::string(buffer);
+}
+
+extern logger logging; ///< default logger, you can create your own one
 
 #endif  // LOGGER_H

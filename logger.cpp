@@ -1,6 +1,8 @@
 #include "logger.h"
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
+#include <threads.h>
 const std::string logger::_out(std::string str, lvl_t lvl, std::string func, std::string file, int line) {
     if (level > lvl)
         return std::string();
@@ -28,10 +30,7 @@ const std::string logger::_out(std::string str, lvl_t lvl, std::string func, std
             << std::endl;
             return std::string();
         }
-        // fo << dt <<'[' << getpid() << "](" << map[lvl] <<") " << '\"'
-        // << str << "\": function " << func << "() in file: "
-        // << file << " at " << line << std::endl;
-        fo << format_string("%s %s:%d: %s: %s\n[%d:%ul]: %s\n",
+        fo << format_string("%s %s:%d: %s: %s\n[%d:%lu]: %s\n",
             buf, file.data(), line, map[lvl].data(), str.data(),
             getpid(), pthread_self(), func.data());
         fo.close();
@@ -42,7 +41,7 @@ const std::string logger::_out(std::string str, lvl_t lvl, std::string func, std
             buf, file.data(), line, _STRING_WITH_COLOR(map[lvl]), str.data(),
             getpid(), pthread_self(), _STRING_WITH_COLOR(func.data()));
         else
-            std::cout << format_string("%s %s:%d: %s: %s\n[%d:%ul]: %s\n",
+            std::cout << format_string("%s %s:%d: %s: %s\n[%d:%lu]: %s\n",
             buf, file.data(), line, map[lvl].data(), str.data(),
             getpid(), pthread_self(), func.data());
     }

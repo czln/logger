@@ -4,7 +4,7 @@ this is a simple c++ logger tool which is thread safe (sice std::iostream is thr
 c++11, and since a macro `##__VA_ARGS__` is used, I know gcc and clang supports it, while for others, I don't know for sure.
 to use this just initialize an instance of the class.
 ## severity
-there're 5 severity levels, including: info, debug, warning, error and fatal
+there're 5 severity levels, including: debug, info, warning, error and fatal
 the default serverity level is `INFO`, to change it, you can change the parameter `lvl` with function `void set_attr(attr_t att, std::string, file=std::string())`, or specify it when construct the class.
 ## output
 the default output is stdout
@@ -17,13 +17,13 @@ it's also a flag bit in `attr`, you can have it like `STDOUT | FILES | ERR_MSG`,
 ## format
 ### string format
 the C like format is supported, for example
-``` c
+``` c++
 std::string str = "std::string"; // or const char str[]="c like string";
 logger log;
 log.info("this is what I add: %s.\n", str);
 ```
 
-``` c
+``` c++
 const char str[] = "c like string";
 std::string fmt = "this is what I add: %s.\n";
 logger log;
