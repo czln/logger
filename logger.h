@@ -104,7 +104,9 @@ public:
 template <typename ...Args>
 inline std::string format_string(std::string format, Args... args) {
     char buffer[BUFSIZ];
-    size_t newlen = snprintf(&buffer[0], BUFSIZ-1, format.data(), args...);
+	///< avoid the warninig about non-literal format string
+	int (*snprintf_ptr)(char*, size_t, const char*, ...) = snprintf;
+    size_t newlen = snprintf_ptr(&buffer[0], BUFSIZ-1, format.data(), args...);
     return std::string(buffer);
 }
 
